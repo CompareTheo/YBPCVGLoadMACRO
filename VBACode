@@ -1,0 +1,262 @@
+Sub YBPEbookCVGLoad()
+Dim sht As Worksheet
+
+    With ActiveSheet.QueryTables.Add(Connection:= _
+        "TEXT;C:\Users\jmitch37\Desktop\Coverage Load TXT\YBPebooks.txt", Destination _
+        :=range("$A$1"))
+        .Name = "YBPebooks"
+        .FieldNames = True
+        .RowNumbers = False
+        .FillAdjacentFormulas = False
+        .PreserveFormatting = True
+        .RefreshOnFileOpen = False
+        .RefreshStyle = xlInsertDeleteCells
+        .SavePassword = False
+        .SaveData = True
+        .AdjustColumnWidth = True
+        .RefreshPeriod = 0
+        .TextFilePromptOnRefresh = False
+        .TextFilePlatform = 65001
+        .TextFileStartRow = 1
+        .TextFileParseType = xlDelimited
+        .TextFileTextQualifier = xlTextQualifierDoubleQuote
+        .TextFileConsecutiveDelimiter = False
+        .TextFileTabDelimiter = True
+        .TextFileSemicolonDelimiter = False
+        .TextFileCommaDelimiter = False
+        .TextFileSpaceDelimiter = False
+        .TextFileColumnDataTypes = Array(1, 1, 1, 1)
+        .TextFileTrailingMinusNumbers = True
+        .Refresh BackgroundQuery:=False
+End With
+
+Columns("G").Value = Columns("C").Value
+Columns("C").ClearContents
+Columns("F").Value = Columns("D").Value
+Columns("D").ClearContents
+Columns("D").Value = Columns("B").Value
+Columns("B").ClearContents
+
+range("A1:G1") = Array("JournalID", "ISSN", "eISSN", "Journal Title", "Public Note", "Resource", "URL")
+
+With Sheets("Sheet1")
+    Set rngCol = .range("A1", .Cells(Rows.Count, 1).End(xlUp))
+End With
+
+lastRow = rngCol.Rows.Count
+range("E2:E" & lastRow).Value = "Read Online"
+
+
+    fblooms = "FO Bloomsbury Unlimited Purchased"
+    rblooms = "Bloomsbury Collections"
+    
+    fwiley = "FO Wiley Unlimited Purchased"
+    rwiley = "Wiley Online Books Collection"
+    
+    ftandf = "FO Taylor& Francis Unlimited Purchased"
+    rtandf = "Taylor & Francis E-books"
+    
+    fsage = "FO SAGE Unlimited Purchased"
+    rsage = "SAGE Knowledge"
+    
+    fproua = "FO ProQuest Unlimited Purchased"
+    rproua = "ProQuest Central Unlimited Users (Collection 1)"
+    
+    fpronl = "FO ProQuest Multiple Copies Purchased"
+    rpronl = "Proquest Central Unlimited Users (Collection 2)"
+    
+    fproadd = "FO ProQuest Single Purchased Additional User"
+    rproadd = "ProQuest Ebook Central 2 Users"
+    
+    fpro1u = "FO Proquest Single Purchased"
+    rpro1u = "Proquest Ebook Central 1 User (Collection 1)"
+    
+    fpro6u = "FO ProQuest 6User Purchased"
+    rpro6u = "ProQuest Ebook Central 6 Users"
+    
+    fpro3u = "FO ProQuest 3User Purchased"
+    rpro3u = "ProQuest Ebook Central 3 Users"
+    
+    fprmus = "FO Project Muse Unlimited Purchased"
+    rprmus = "Project MUSE Books"
+    
+    foxschuu = "FO Oxford Scholarship Unlimited Purchased"
+    roxschuu = "Oxford Scholarship Online"
+    
+    foxsch1u = "FO Oxford Scholarship Single Purchased"
+    roxsch1u = "Oxford Scholarship Online - Single User"
+    
+    foxref = "FO Oxford Reference Unlimited Purchased"
+    roxref = "Oxford Reference"
+    
+    fjstr = "FO JSTOR Unlimited Purchased"
+    rjstr = "JSTOR e-books"
+    
+    fglob = "FO IGI Global Unlimited Purchased"
+    rglob = "IGI Global E-Access Books"
+    
+    fgale = "FO Gale Unlimited Purchased"
+    rgale = "Gale Virtual Reference Library"
+    
+    felsev = "FO Elsevier Unlimited Purchased"
+    relsev = "Elsevier Books"
+    
+    febsuu = "FO EBSCO Unlimited Purchased"
+    rebsuu = "eBook Collection 4(EBSCOhost)"
+    
+    febsca = "FO EBSCO Limited User Access Purchased"
+    rebsca = "eBook Collection 5 (EBSCOhost)"
+
+    febsea1u = "FO EBSCO Single Purchased"
+    rebsea1u = "eBook Collection 1 (EBSCOhost)"
+    
+    febs3u = "FO EBSCO 3User Purchased"
+    rebs3u = "eBook Collection 2 (EBSCOhost)"
+    
+    fcred3u = "FO Credo Unlimited Purchased"
+    rcred3u = "Credo Reference 3"
+    
+    fcredsu = "FO Credo Single Purchased"
+    rcredsu = "Credo Reference 2"
+    
+    fcambea = "FO Cambridge Unlimited Purchased"
+    rcambea = "Cambridge Books"
+    
+    fprodda = "DDA ProQuest single DDApool rotating No authority or TOC processing"
+    rprodda = "ProQuest Ebook Central 1 User (Collection 3)"
+    
+    fjstrdda = "DDA JSTOR Unlimited Purchased"
+    rjstrdda = "JSTOR E-book Collection 2"
+    
+    fproaprnlul = "APP ProQuest Unlimited Purchased"
+    rproaprnlul = "ProQuest Ebook Central Unlimited Users (Collection 3)"
+    
+    fproapr1u = "APP ProQuest Single Purchased"
+    rproapr1u = "ProQuest Ebook Central 1 User (Collection 2)"
+    
+    febsapp = "APP EBSCO Single Purchased"
+    rebsapp = "ebook Collection 3 (EBSCOhost)"
+    
+ For Each sht In ActiveWorkbook.Worksheets
+        sht.Cells.Replace What:=fblooms, Replacement:=rblooms, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fwiley, Replacement:=rwiley, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=ftandf, Replacement:=rtandf, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fsage, Replacement:=rsage, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fproua, Replacement:=rproua, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fpronl, Replacement:=rpronl, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fproadd, Replacement:=rproadd, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fpro1u, Replacement:=rpro1u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fpro6u, Replacement:=rpro6u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fpro3u, Replacement:=rpro3u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fprmus, Replacement:=rprmus, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=foxschuu, Replacement:=roxschuu, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=foxsch1u, Replacement:=roxsch1u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=foxref, Replacement:=roxref, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fjstr, Replacement:=rjstr, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fglob, Replacement:=rglob, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fgale, Replacement:=rgale, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=felsev, Replacement:=relsev, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=febsuu, Replacement:=rebsuu, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=febsca, Replacement:=rebsca, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=febsea1u, Replacement:=rebsea1u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=febs3u, Replacement:=rebs3u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fcred3u, Replacement:=rcred3u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fcredsu, Replacement:=rcredsu, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fcambea, Replacement:=rcambea, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fprodda, Replacement:=rprodda, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fjstrdda, Replacement:=rjstrdda, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fproaprnlul, Replacement:=rproaprnlul, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=fproapr1u, Replacement:=rproapr1u, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+        
+        sht.Cells.Replace What:=febsapp, Replacement:=rebsapp, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+    Next sht
+
+End Sub
